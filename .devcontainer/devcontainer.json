@@ -1,0 +1,7 @@
+{
+  "name": "software",
+  "image": "gcc",
+  "extentions":[
+    "ms-vscode.cpptools"
+  ]
+}
