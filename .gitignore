@@ -1,0 +1,3 @@
+keep/*.o
+main/a.out
+.DS_Store
