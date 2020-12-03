@@ -1,11 +1,11 @@
 #include<stdio.h>
 #include"header.h"
 
-void task04(int id , NMEM* a)
+void task04(int t04 , NMEM* db)
 {
-    a[0].flag = 1;
-    a[0].ln = id;
-    a[0].state = 4;
+    db[0].flag = 1;
+    db[0].ln = id;
+    db[0].state = 4;
     
-    output(1,id,13);
+    output(1,t04,13);
 }
