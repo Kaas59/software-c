@@ -5,9 +5,9 @@ extern MEM data[USERNUM];
 
 void next_state(NMEM* m)
 {
-    int t_num, i=0;
+    int t_num;
 
-    for(i; i<3; i++)
+    for(int i = 0; i < 3; i++)
     {
         if(m[i].flag == 1){
 
