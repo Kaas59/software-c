@@ -3,16 +3,16 @@
 
 extern MEM data[USERNUM];
 
-void next_state(NMEM* m)
+void next_state(NMEM* db)
 {
     int t_num;
 
     for(int i = 0; i < 3; i++)
     {
-        if(m[i].flag == 1){
+        if(db[i].flag == 1){
 
-            t_num = m[i].ln;
-            data[t_num].state = m[i].state;
+            t_num = db[i].ln;
+            data[t_num].state = db[i].state;
 
         }
 
