@@ -5,82 +5,86 @@ extern MEM data[USERNUM];
 
 ST_ANA st_ana(int user_device_num, int signal_id)
 {
-  ST_ANA st_data = {-1};
+  ST_ANA st_data = { NULL };
   int db_state = -1;
+  int db_terminal = -1;
+  int db_or_ter_ident = -1;
   for(int idx = 1; idx < USERNUM; idx++)
   {
-    // printf("==============\ntelnum：%d\nstate：%d\nterminal：%d\nor_ac：%d\nor_ter_ident：%d\n==============\n",&data[idx].telnum,&data[idx].state,&data[idx].terminal,&data[idx].or_ac,&data[idx].or_ter_ident);
-    if(data[idx].telnum%4000 == user_device_num)
+    if(data[idx].telnum % 1000 == user_device_num)
     {
-      // printf("端末確認：%d\n",data[idx].telnum%4000);
       db_state = data[idx].state;
-      break;
+      db_terminal = data[idx].terminal;
+      db_or_ter_ident = data[idx].or_ter_ident;
     }
   }
 
   switch(db_state)
   {
-    case 0:
-      if (signal_id == 0)
+    case idle:
+      if (signal_id == offhook)
       {
-        st_data.anal = 40;
+        st_data.anal = OR_ANA_FUNC;
       }
       else
       {
-        printf("異常検知①\n");
+        printf("イベント(%d)は無効！\n",signal_id);
       }
       break;
-    case 1:
-      if (signal_id == 1)
+    case dialtone:
+      if (signal_id == onhook)
       {
-        st_data.task = 510;
+        st_data.task = TASK10;
       }
-      else if (signal_id == 2)
+      else if (signal_id == dial)
       {
-        st_data.anal = 41;
+        st_data.anal = NUM_ANA_FUNC;
       }
       else
       {
-        printf("異常検知②\n");
+        printf("イベント(%d)は無効！\n",signal_id);
       }
       break;
-    case 2:
-      if (signal_id == 0)
+    case ringing:
+      if (signal_id == offhook && db_or_ter_ident == terminate)
       {
-        st_data.task == 523;
+        st_data.task == TASK23;
+        printf("[%d]=>呼び返し音切断\n",db_terminal);
+        printf("[%d]=>呼び出し音切断\n",db_state);
+        printf("[%d]と[%d]=>接続\n",db_terminal,db_state);
       }
-      else if (signal_id == 1)
+      else if (signal_id == onhook && db_or_ter_ident == originate)
       {
-        st_data.task = 520;
+        st_data.task = TASK20;
       }
       else
       {
-        printf("異常検知③\n");
+        printf("イベント(%d)は無効！\n",signal_id);
       }
       break;
-    case 3:
-      if (signal_id == 1)
+    case talk:
+      if (signal_id == onhook)
       {
-        st_data.task = 530;
+        st_data.task = TASK30;
       }
       else
       {
-        printf("異常検知④\n");
+        printf("イベント(%d)は無効！\n",signal_id);
       }
       break;
-    case 4:
-      if (signal_id == 1)
+    case busy:
+      if (signal_id == onhook)
       {
-        st_data.task = 540;
+        st_data.task = TASK40;
       }
       else
       {
-        printf("異常検知⑤\n");
+        printf("イベント(%d)は無効！\n",signal_id);
       }
       break;
     default:
-      printf("異常検知⑥\n");
+      printf("イベント(%d)は無効！\n",signal_id);
       break;
-    }
+  }
   return st_data;
 }
