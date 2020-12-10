@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "header.h"
 
-void task12(int t12, int ta12, NMEM* jo)
+void task12(int user_device_num, int ring_device_num, NMEM* db_update)
 {
-    jo[2].flag = 1;
-    jo[2].ln = t12; //端末番号
-    jo[2].state = 2; //次状態(ringing)
+    db_update[2].flag = 1;
+    db_update[2].ln = user_device_num;
+    db_update[2].state = 2; 
 
 next_state(jo);
 
