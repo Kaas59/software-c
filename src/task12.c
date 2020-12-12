@@ -9,8 +9,8 @@ void task12(int user_device_num, int ring_device_num, NMEM* db_update)
 
 next_state(db_update);
 
-output(disconnect, t12, SR);
-output(disconnect, t12, DIALTONE);
-output(connect, t12, RINGBACKTONE);
-output(connect, ta12, RINGINGTONE);
+output(disconnect, user_device_num, SR);
+output(disconnect, user_device_num, DIALTONE);
+output(connect, user_device_num, RINGBACKTONE);
+output(connect, ring_device_num, RINGINGTONE);
 }
