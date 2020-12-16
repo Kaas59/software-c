@@ -7,14 +7,12 @@ ST_ANA st_ana(int user_device_num, int signal_id)
 {
   ST_ANA st_data = { NULL };
   int db_state = -1;
-  int db_terminal = -1;
   int db_or_ter_ident = -1;
   for(int idx = 1; idx < USERNUM; idx++)
   {
     if(data[idx].telnum % 1000 == user_device_num)
     {
       db_state = data[idx].state;
-      db_terminal = data[idx].terminal;
       db_or_ter_ident = data[idx].or_ter_ident;
     }
   }
@@ -48,10 +46,7 @@ ST_ANA st_ana(int user_device_num, int signal_id)
     case ringing:
       if (signal_id == offhook && db_or_ter_ident == terminate)
       {
-        st_data.task == TASK23;
-        printf("[%d]=>呼び返し音切断\n",db_terminal);
-        printf("[%d]=>呼び出し音切断\n",db_state);
-        printf("[%d]と[%d]=>接続\n",db_terminal,db_state);
+        st_data.task = TASK23;
       }
       else if (signal_id == onhook && db_or_ter_ident == originate)
       {
