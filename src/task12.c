@@ -3,7 +3,6 @@
 extern MEM data[USERNUM];
 void task12(int user_device_num, int ring_device_num, NMEM* db_update)
 {
-    printf("task12\n");
     db_update[0].flag = 1;
     db_update[0].ln = user_device_num;
     db_update[0].state = ringing;
