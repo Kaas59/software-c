@@ -1,11 +1,11 @@
 #include<stdio.h>
 #include"header.h"
 
-void task04(int t04 , NMEM* db)
+void task04(int user_device_num , NMEM* db_update)
 {
-    db[0].flag = 1;
-    db[0].ln = id;
-    db[0].state = 4;
+    db_update[0].flag = 1;
+    db_update[0].ln = user_device_num;
+    db_update[0].state = busy;
     
-    output(1,t04,13);
+    output(1,user_device_num,13);
 }
