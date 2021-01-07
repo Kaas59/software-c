@@ -54,6 +54,7 @@
 #define TASK30 530
 #define TASK40 540
 
+
 /*構造体型宣言*/
 typedef struct{
 	int telnum;
@@ -95,6 +96,31 @@ typedef struct{
 	int anal;
 }TER_ANA;
 
+typedef struct call_register_ter1{
+    int callee_num;         // 着信相手の端末番号
+    char time[35];         // 時間
+    struct student *next;  // 次のデータがある場所
+} CALL_REGISTER_TER1;
+
+typedef struct call_register_ter2{
+    int callee_num;         // 着信相手の端末番号
+    char time[35];         // 時間
+    struct student *next;  // 次のデータがある場所
+} CALL_REGISTER_TER2;
+
+typedef struct call_register_ter3{
+    int callee_num;         // 着信相手の端末番号
+    char time[35];         // 時間
+    struct student *next;  // 次のデータがある場所
+} CALL_REGISTER_TER3;
+
+typedef struct call_register_ter4{
+    int callee_num;         // 着信相手の端末番号
+    char time[35];         // 時間
+    struct student *next;  // 次のデータがある場所
+} CALL_REGISTER_TER4;
+
+
 /*プロトタイプ宣言*/
 void next_state(NMEM*);
 ST_ANA	st_ana(int,int);
@@ -112,4 +138,4 @@ void task23(int,NMEM*);
 void task30(int,NMEM*);
 void task40(int,NMEM*);
 void tk_select(int,int,int);
-
+void call_register(int,int);
