@@ -64,6 +64,14 @@ typedef struct{
 }MEM;
 
 typedef struct{
+	int telnum;
+	char talk_start_time[256];
+	char log_1[100];
+	char log_2[100];
+	char log_3[100];
+}MEMT;
+
+typedef struct{
 	int task;
 	int anal;
 }OR_ANA;
@@ -112,4 +120,5 @@ void task23(int,NMEM*);
 void task30(int,NMEM*);
 void task40(int,NMEM*);
 void tk_select(int,int,int);
+void call_register(int,int,int,int,int);
 

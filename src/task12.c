@@ -23,4 +23,6 @@ void task12(int user_device_num, int ring_device_num, NMEM* db_update)
     output(disconnect, user_device_num, DIALTONE);
     output(connect, user_device_num, RINGBACKTONE);
     output(connect, ring_device_num, RINGINGTONE);
+
+    call_register(-1, 0, user_device_num, ring_device_num, TASK12);
 }
