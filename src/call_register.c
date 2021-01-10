@@ -118,6 +118,7 @@ char* time_get(void)    //時間取得関数
 {
     time_t t = time(NULL);
 	struct tm *local = localtime(&t);
+	local->tm_hour += 9;
 
 	char buf[128];
     char* a=NULL;
