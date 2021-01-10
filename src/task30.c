@@ -23,9 +23,9 @@ void task30(int disconnect_device_num, NMEM* db_update)
     end_time = time(NULL);
 
     struct tm timeptr;
-    char *s =data_time[disconnect_device_num].talk_start_time;
+    char *start_time_string =data_time[disconnect_device_num].talk_start_time;
 
-    strptime(s,"%Y-%m-%d %H:%M:%S", &timeptr);
+    strptime(start_time_string, "%Y-%m-%d %H:%M:%S", &timeptr);
 
     time_t start_time = mktime(&timeptr);
 
