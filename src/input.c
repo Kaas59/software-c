@@ -13,11 +13,11 @@ MEM data[USERNUM] = {
         {4004, idle, 0, YES, 0}
 };
 MEMT data_time[USERNUM] = {
-    {  -1, "-1", "\0", "\0", "\0"},
-    {4001, "-1", "\0", "\0", "\0"},
-    {4002, "-1", "\0", "\0", "\0"},
-    {4003, "-1", "\0", "\0", "\0"},
-    {4004, "-1", "\0", "\0", "\0"}
+    {  -1, "\0", "\0", "\0", "\0"},
+    {4001, "\0", "\0", "\0", "\0"},
+    {4002, "\0", "\0", "\0", "\0"},
+    {4003, "\0", "\0", "\0", "\0"},
+    {4004, "\0", "\0", "\0", "\0"}
 }; 
 
 
@@ -37,12 +37,22 @@ int main(void)
     char device_info_c3[4][30];
     char log_device_num[30];
 
+    char set_or_number_s[30];
+    char user_device_num_s[30];
+    char tel_num_s[30];
+
     printf("■□■□設計演習C Ver.1.3 ■□■□\n");
 
     while(1)
     {
         printf("初期設定変更を行いますか？Yes=1 No=0 >");
-        scanf("%d",&set_or_number);
+        scanf("%s",&set_or_number_s);
+
+        if(isdigit(set_or_number_s[0]))
+        {
+            set_or_number = atoi(set_or_number_s);
+        }
+        else continue;
 
         if(set_or_number == 1)
         {
@@ -62,7 +72,6 @@ int main(void)
             else continue;
             
         }
-
         else if(set_or_number == 0) break; //0入力で繰り返し終了
         
         else continue; //０と1以外は繰り返し
@@ -71,7 +80,17 @@ int main(void)
     while(1)
     {
         printf("端末番号(1-4), 着信履歴の参照(5) ->");
-        scanf("%d",&user_device_num);
+        scanf("%s",&user_device_num_s);
+
+        if(isdigit(user_device_num_s[0]))
+        {
+            user_device_num = atoi(user_device_num_s);
+        }
+        else if(!strcmp(user_device_num_s, "i"))
+        {
+            user_device_num = 9999;
+        }
+        else continue;
 
         if(0 < user_device_num && user_device_num <5)
         {
@@ -87,12 +106,7 @@ int main(void)
             tk_select(user_device_num,signal_id,tel_num);
         }
 
-        else if(user_device_num == 'q')
-        {
-            break;
-        }
-
-        else if(user_device_num == 9)  //本当ならiの入力時にこのプログラムが実行される
+        else if(user_device_num == 9999)  //本当ならiの入力時にこのプログラムが実行される
         {
             while(1)
             { //printf("%d, %d, %d, %d", data[1].state,data[2].state, data[3].state, data[4].state); デバック
