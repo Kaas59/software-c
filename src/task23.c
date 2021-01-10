@@ -25,16 +25,16 @@ void task23(int ring_device_num, NMEM* db_update)
     db_update[1].ln = user_device_num;
     db_update[1].state = talk;
 
-    char s[300] = {'\0'};
+    char start_time_string[300] = {'\0'};
     time_t start_time;
     struct tm *timeptr;
     start_time = time(NULL); 
     timeptr = localtime(&start_time);
 
-    strftime(s, 300, "%Y-%m-%d %H:%M:%S", timeptr);    
+    strftime(start_time_string, 300, "%Y-%m-%d %H:%M:%S", timeptr);    
 
-    strcpy(data_time[ring_device_num].talk_start_time,s);
-    strcpy(data_time[user_device_num].talk_start_time,s);
+    strcpy(data_time[ring_device_num].talk_start_time, start_time_string);
+    strcpy(data_time[user_device_num].talk_start_time, start_time_string);
 
     output(disconnect, user_device_num, 12);
     output(disconnect, ring_device_num, 11);
