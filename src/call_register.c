@@ -17,17 +17,17 @@ void call_register(int show_device_num, int show_or_record,int user_device_num, 
     static int count[USERNUM] = {0,0,0,0,0};
     char call_device_name[30]; 
 
-    if(show_or_record == 1) //show logデータを見る
+    if(show_or_record == 1)
     {
         show_log(count,show_device_num);
     }
 
-    else if(show_or_record == 0) //record logデータを記録する 
+    else if(show_or_record == 0)
     {
         if(task_num == TASK12)
         {
             char* time_t12=NULL;
-            time_t12 = time_get();//時間取得
+            time_t12 = time_get();
 
             switch (user_device_num)
             {
@@ -68,13 +68,13 @@ void call_register(int show_device_num, int show_or_record,int user_device_num, 
                     strcat(data_time[ring_device_num].log_3, time_t12);
                     break;
             }
-            free(time_t12);//解放
+            free(time_t12);
         }
 
         else if(task_num == TASK23)
         {
             char* time_t23=NULL;
-            time_t23 = time_get();//時間取得
+            time_t23 = time_get();
 
             switch (user_device_num)
             {
@@ -107,14 +107,14 @@ void call_register(int show_device_num, int show_or_record,int user_device_num, 
                     strcat(data_time[ring_device_num].log_3, time_t23);                  
                     break;
             }
-            free(time_t23);//解放
+            free(time_t23);
         }
         else exit(1);
     }
     else exit(1);
 }
 
-char* time_get(void)    //時間取得関数
+char* time_get(void)
 {
     time_t t = time(NULL);
 	struct tm *local = localtime(&t);
@@ -134,24 +134,23 @@ char* time_get(void)    //時間取得関数
     return a;
 }
 
-//logデータを見るための関数　文字の表示パターンごとにifで分けてそれぞれ表示。
 void show_log(int count[USERNUM], int show_device_num)
 {
     char call_device_name[30];
-    char strcmp_c[10]; //log_1の不在or着信 の2文字だけを取り出す。
-    char strcmp_c2[10];//log_2の不在or着信 の2文字だけを取り出す。
-    char strcmp_c3[10];//log_3の不在or着信 の2文字だけを取り出す。
+    char strcmp_c[10];
+    char strcmp_c2[10];
+    char strcmp_c3[10];
 
     printf("\n-------------------------------------------------\n");
     printf("着信履歴を上から最新３件まで表示します\n");
-        if(count[show_device_num] == 0)     //logデータがない場合
+        if(count[show_device_num] == 0)
         {
             printf("\n着信履歴はありません\n\n");
         }
-        else if(count[show_device_num] == 1)//logデータが1件の場合
+        else if(count[show_device_num] == 1)
         {
             printf("(赤文字 → 不在着信   青文字 → 着信)\n");
-            strncpy(strcmp_c, data_time[show_device_num].log_1+13, 6);//日本語一つ3バイトで計算されていた
+            strncpy(strcmp_c, data_time[show_device_num].log_1+13, 6);
             strcmp_c[6] = '\0';   
             if(strcmp("不在",strcmp_c)==0)
             {
@@ -163,7 +162,7 @@ void show_log(int count[USERNUM], int show_device_num)
             }
             printf("-------------------------------------------------\n");
         }
-        else if(count[show_device_num] == 2)  //logデータが2件の場合
+        else if(count[show_device_num] == 2)
         {
             printf("(赤文字 → 不在着信   青文字 → 着信)\n");
             strncpy(strcmp_c, data_time[show_device_num].log_1+13, 6);
@@ -171,7 +170,7 @@ void show_log(int count[USERNUM], int show_device_num)
             strncpy(strcmp_c2, data_time[show_device_num].log_2+13, 6);
             strcmp_c2[6] = '\0'; 
     
-            if(strcmp("不在",strcmp_c)==0 && strcmp("不在",strcmp_c2)==0 )//2つとも不在着信データの場合
+            if(strcmp("不在",strcmp_c)==0 && strcmp("不在",strcmp_c2)==0 )
             {
                 printf("\x1b[31m%s\033[m\n",data_time[show_device_num].log_2);//赤
                 printf("\x1b[31m%s\033[m\n",data_time[show_device_num].log_1);//赤
@@ -193,7 +192,7 @@ void show_log(int count[USERNUM], int show_device_num)
             }
             printf("-------------------------------------------------\n");
         }
-        else if(count[show_device_num] == 3)  //logデータが3件の場合
+        else if(count[show_device_num] == 3)
         {
              printf("(赤文字 → 不在着信   青文字 → 着信)\n");
             strncpy(strcmp_c, data_time[show_device_num].log_1+13, 6);
@@ -203,7 +202,7 @@ void show_log(int count[USERNUM], int show_device_num)
             strncpy(strcmp_c3, data_time[show_device_num].log_3+13, 6);
             strcmp_c3[6] = '\0'; 
 
-            if(strcmp("不在",strcmp_c)==0 && strcmp("不在",strcmp_c2)==0 && strcmp("不在",strcmp_c3)==0)//3つとも不在着信データの場合
+            if(strcmp("不在",strcmp_c)==0 && strcmp("不在",strcmp_c2)==0 && strcmp("不在",strcmp_c3)==0)
             {
                 printf("\x1b[31m%s\033[m\n",data_time[show_device_num].log_3);//赤
                 printf("\x1b[31m%s\033[m\n",data_time[show_device_num].log_2);//赤

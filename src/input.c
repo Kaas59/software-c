@@ -30,8 +30,8 @@ int main(void)
     int tel_num = -1;
 
     char set_device_num_c[30];
-    char device_info[30]; //iの入力で個別データ情報の可視化
-    char show_select[30]; //1か0で続けて情報をみるかを選択
+    char device_info[30];
+    char show_select[30];
     char device_info_c1[4][30];
     char device_info_c2[4][30];
     char device_info_c3[4][30];
@@ -72,9 +72,9 @@ int main(void)
             else continue;
             
         }
-        else if(set_or_number == 0) break; //0入力で繰り返し終了
+        else if(set_or_number == 0) break;
         
-        else continue; //０と1以外は繰り返し
+        else continue;
     }
     
     while(1)
@@ -106,11 +106,10 @@ int main(void)
             tk_select(user_device_num,signal_id,tel_num);
         }
 
-        else if(user_device_num == 9999)  //本当ならiの入力時にこのプログラムが実行される
+        else if(user_device_num == 9999)
         {
             while(1)
-            { //printf("%d, %d, %d, %d", data[1].state,data[2].state, data[3].state, data[4].state); デバック
-
+            {
                 printf("個別データ情報\n");
                 printf("状態(1),発信を拒否する端末(2),相手端末(3),発着識別子(4)>");
                 scanf("%s",device_info);
