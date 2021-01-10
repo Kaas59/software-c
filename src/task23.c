@@ -3,13 +3,7 @@
 #include <string.h>
 #include "header.h"
 extern MEM data[USERNUM];
-MEMT data_time[USERNUM] = {
-    {-1, -1},
-    {4001, -1},
-    {4002, -1},
-    {4003, -1},
-    {4004, -1}
-}; 
+extern MEMT data_time[USERNUM];
 
 void task23(int ring_device_num, NMEM* db_update)
 {
@@ -30,7 +24,7 @@ void task23(int ring_device_num, NMEM* db_update)
     struct tm *timeptr;
     start_time = time(NULL); 
     timeptr = localtime(&start_time);
-
+  
     strftime(start_time_string, 300, "%Y-%m-%d %H:%M:%S", timeptr);    
 
     strcpy(data_time[ring_device_num].talk_start_time, start_time_string);
@@ -39,4 +33,5 @@ void task23(int ring_device_num, NMEM* db_update)
     output(disconnect, user_device_num, 12);
     output(disconnect, ring_device_num, 11);
     printf("[%d]と[%d]=>接続\n", user_device_num, ring_device_num);
-    }
+    call_register(-1, 0, user_device_num, ring_device_num, TASK23);
+}
