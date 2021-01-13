@@ -32,6 +32,6 @@ void task23(int ring_device_num, NMEM* db_update)
 
     output(disconnect, user_device_num, 12);
     output(disconnect, ring_device_num, 11);
-    printf("[%d]と[%d]=>接続\n", user_device_num, ring_device_num);
+    output(connect, user_device_num, ring_device_num);
     call_register(-1, 0, user_device_num, ring_device_num, TASK23);
 }

@@ -29,7 +29,7 @@ void task30(int disconnect_device_num, NMEM* db_update)
 
     time_t start_time = mktime(&timeptr);
 
-    printf("[%d]と[%d]=>切断\n", disconnect_device_num, device_num);
+    output(disconnect, disconnect_device_num, device_num);
     printf("料金：%d円\n", (int)(end_time - start_time)/2);
     output(connect, device_num, 13);
    

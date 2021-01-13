@@ -90,6 +90,10 @@ int main(void)
         {
             user_device_num = 9999;
         }
+        else if(!strcmp(user_device_num_s, "q"))
+        {
+            user_device_num = 9998;
+        }
         else continue;
 
         if(0 < user_device_num && user_device_num <5)
@@ -106,125 +110,137 @@ int main(void)
             tk_select(user_device_num,signal_id,tel_num);
         }
 
-        else if(user_device_num == 9999)
+        else if(user_device_num == 9998)
         {
-            while(1)
-            {
-                printf("個別データ情報\n");
-                printf("状態(1),発信を拒否する端末(2),相手端末(3),発着識別子(4)>");
-                scanf("%s",device_info);
-
-                switch(device_info[0]) //最初の文字で判断。
-                {
-                    case '1':
-                        for(int x1=1; x1<5; x1++)
-                        {
-                            if(data[x1].state == idle) strcpy(device_info_c1[x1-1], "idle");
-                            if(data[x1].state == dialtone) strcpy(device_info_c1[x1-1], "dialtone");
-                            if(data[x1].state == ringing) strcpy(device_info_c1[x1-1], "ringing");
-                            if(data[x1].state == talk) strcpy(device_info_c1[x1-1], "talk");
-                            if(data[x1].state == busy) strcpy(device_info_c1[x1-1], "busy");
-                        }
-
-                        printf("Terminal    State\n-------------------\n");
-                        printf("       1      %s\n",device_info_c1[0]);
-                        printf("       2      %s\n",device_info_c1[1]);
-                        printf("       3      %s\n",device_info_c1[2]);
-                        printf("       4      %s\n",device_info_c1[3]);
-                        break;
-
-                    case '2':
-                        for(int x2=1; x2<5; x2++)
-                        {
-                            if(data[x2].or_ac == NO) strcpy(device_info_c2[x2-1], "DENIAL");
-                            if(data[x2].or_ac == YES) strcpy(device_info_c2[x2-1], "ACCEPT");
-                        }
-                        
-                        printf("Terminal   Accept Flag\n------------------------\n");
-                        printf("       1        %s\n",device_info_c2[0]);
-                        printf("       2        %s\n",device_info_c2[1]);
-                        printf("       3        %s\n",device_info_c2[2]);
-                        printf("       4        %s\n",device_info_c2[3]);
-                        break;
-                    
-                    case '3':
-                        printf("Terminal   Remote \n--------------------\n");
-                        printf("       1        %d\n",data[1].terminal);
-                        printf("       2        %d\n",data[2].terminal);
-                        printf("       3        %d\n",data[3].terminal);
-                        printf("       4        %d\n",data[4].terminal);
-                        break;
-                    
-                    case '4':
-                        for(int x3=1; x3<5; x3++)
-                        {
-                            if(data[x3].or_ter_ident == terminate  || data[x3].or_ter_ident == 0) strcpy(device_info_c3[x3-1], "TERMINATE");
-                            if(data[x3].or_ter_ident == originate) strcpy(device_info_c3[x3-1], "ORIGINATE");
-                        }
-
-                        printf("Terminal   Accept Flag\n------------------------\n");
-                        printf("       1        %s\n",device_info_c3[0]);
-                        printf("       2        %s\n",device_info_c3[1]);
-                        printf("       3        %s\n",device_info_c3[2]);
-                        printf("       4        %s\n",device_info_c3[3]);
-                        break;
-
-                    default:
-                        break;
-                }
-
-                while(1)
-                {
-                    printf("他の情報見ますか？ Yes=1 No=0 >");
-                    scanf("%s",show_select);
-                    if(show_select[0] == '1' || show_select[0] == '0') break;
-                }
-
-                if     (show_select[0] == '1') continue;
-                else if(show_select[0] == '0') break;
-            }
-            continue;
+            break;
         }
 
-        else if(user_device_num == 5)
-        {
-            while(1)
-            {
-                printf("どの端末の着信履歴を参照しますか？\n");
-                printf("端末番号(1-4)->");
-                scanf("%s",log_device_num);
+        else if (user_device_num == 9999) {
+          while (1) {
+            printf("個別データ情報\n");
+            printf("状態(1),発信を拒否する端末(2),相手端末(3),発着識別子(4)>");
+            scanf("%s", device_info);
 
-                switch (log_device_num[0])
-                {
-                case '1': call_register(1,1,-1,-1,-1);
-                    break;
-                case '2': call_register(2,1,-1,-1,-1);
-                    break;
-                case '3': call_register(3,1,-1,-1,-1);
-                    break;
-                case '4': call_register(4,1,-1,-1,-1);
-                    break;
-                default:
-                    break;
-                } //参照は1、履歴の追加は0を第二引数に追加
-                
-                while(1)
-                {
-                    printf("他の情報見ますか？ Yes=1 No=0 >");
-                    scanf("%s",show_select);
-                    if(show_select[0] == '1' || show_select[0] == '0') break;
+            switch (device_info[0])  //最初の文字で判断。
+            {
+              case '1':
+                for (int x1 = 1; x1 < 5; x1++) {
+                  if (data[x1].state == idle)
+                    strcpy(device_info_c1[x1 - 1], "idle");
+                  if (data[x1].state == dialtone)
+                    strcpy(device_info_c1[x1 - 1], "dialtone");
+                  if (data[x1].state == ringing)
+                    strcpy(device_info_c1[x1 - 1], "ringing");
+                  if (data[x1].state == talk)
+                    strcpy(device_info_c1[x1 - 1], "talk");
+                  if (data[x1].state == busy)
+                    strcpy(device_info_c1[x1 - 1], "busy");
                 }
 
-                if     (show_select[0] == '1') continue;
-                else if(show_select[0] == '0') break;
+                printf("Terminal    State\n-------------------\n");
+                printf("       1      %s\n", device_info_c1[0]);
+                printf("       2      %s\n", device_info_c1[1]);
+                printf("       3      %s\n", device_info_c1[2]);
+                printf("       4      %s\n", device_info_c1[3]);
+                break;
+
+              case '2':
+                for (int x2 = 1; x2 < 5; x2++) {
+                  if (data[x2].or_ac == NO)
+                    strcpy(device_info_c2[x2 - 1], "DENIAL");
+                  if (data[x2].or_ac == YES)
+                    strcpy(device_info_c2[x2 - 1], "ACCEPT");
+                }
+
+                printf("Terminal   Accept Flag\n------------------------\n");
+                printf("       1        %s\n", device_info_c2[0]);
+                printf("       2        %s\n", device_info_c2[1]);
+                printf("       3        %s\n", device_info_c2[2]);
+                printf("       4        %s\n", device_info_c2[3]);
+                break;
+
+              case '3':
+                printf("Terminal   Remote \n--------------------\n");
+                printf("       1        %d\n", data[1].terminal);
+                printf("       2        %d\n", data[2].terminal);
+                printf("       3        %d\n", data[3].terminal);
+                printf("       4        %d\n", data[4].terminal);
+                break;
+
+              case '4':
+                for (int x3 = 1; x3 < 5; x3++) {
+                  if (data[x3].or_ter_ident == terminate ||
+                      data[x3].or_ter_ident == 0)
+                    strcpy(device_info_c3[x3 - 1], "TERMINATE");
+                  if (data[x3].or_ter_ident == originate)
+                    strcpy(device_info_c3[x3 - 1], "ORIGINATE");
+                }
+
+                printf("Terminal   Accept Flag\n------------------------\n");
+                printf("       1        %s\n", device_info_c3[0]);
+                printf("       2        %s\n", device_info_c3[1]);
+                printf("       3        %s\n", device_info_c3[2]);
+                printf("       4        %s\n", device_info_c3[3]);
+                break;
+
+              default:
+                break;
             }
-            continue;
+
+            while (1) {
+              printf("他の情報見ますか？ Yes=1 No=0 >");
+              scanf("%s", show_select);
+              if (show_select[0] == '1' || show_select[0] == '0') break;
+            }
+
+            if (show_select[0] == '1')
+              continue;
+            else if (show_select[0] == '0')
+              break;
+          }
+          continue;
         }
 
-        else 
-        {
-            printf("端末番号無効です！\n"); 
-            continue;
+        else if (user_device_num == 5) {
+          while (1) {
+            printf("どの端末の着信履歴を参照しますか？\n");
+            printf("端末番号(1-4)->");
+            scanf("%s", log_device_num);
+
+            switch (log_device_num[0]) {
+              case '1':
+                call_register(1, 1, -1, -1, -1);
+                break;
+              case '2':
+                call_register(2, 1, -1, -1, -1);
+                break;
+              case '3':
+                call_register(3, 1, -1, -1, -1);
+                break;
+              case '4':
+                call_register(4, 1, -1, -1, -1);
+                break;
+              default:
+                break;
+            }  //参照は1、履歴の追加は0を第二引数に追加
+
+            while (1) {
+              printf("他の情報見ますか？ Yes=1 No=0 >");
+              scanf("%s", show_select);
+              if (show_select[0] == '1' || show_select[0] == '0') break;
+            }
+
+            if (show_select[0] == '1')
+              continue;
+            else if (show_select[0] == '0')
+              break;
+          }
+          continue;
+        }
+
+        else {
+          printf("端末番号無効です！\n");
+          continue;
         }
     }
 
